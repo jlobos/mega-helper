@@ -1,6 +1,6 @@
 # Mega Helper
 
-Get info de [mega.nz](https://mega.nz/) links (direct links &amp; folders)
+Get info de [mega.nz](https://mega.nz/) links (direct links and folders)
 
 [![Build Status](https://travis-ci.org/jlobos/mega-helper.svg?branch=master)](https://travis-ci.org/jlobos/mega-helper)
 [![Build status](https://ci.appveyor.com/api/projects/status/w96td4bv48h1173d?svg=true)](https://ci.appveyor.com/project/jlobos/mega-helper)
