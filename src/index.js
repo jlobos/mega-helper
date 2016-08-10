@@ -72,26 +72,17 @@ class Mega {
 
         const shareKey = crypto.base64ToA32(split[2])
         const files = res.f.map(f => {
-          if (!f.k) return cb({ error: 'missing file key' })
-
           let key = f.k.split(':')[1]
-          if (key.length < 46) {
-            let k = crypto.base64ToA32(key) // short keys: AES
-            let len = shareKey.length
 
-            if (len === 4 || len === 6 || len === 8) {
-              const decKey = crypto.decryptKey(shareKey, k)
-              if (!decKey) return cb({ error: 'coult not get file key' })
-              k = decKey
-
-              let a = crypto.base64ToAb(f.a)
-              a = crypto.decAttr(a, k)
-              return { h: f.h, p: f.p, t: f.t, size: f.s, name: a.n }
-            } else {
-              cb({ error: 'wrong shared key size' })
-            }
-          }
-        })
+          try {
+            let k, a
+            k = crypto.base64ToA32(key)
+            k = crypto.decryptKey(shareKey, k)
+            a = crypto.base64ToAb(f.a)
+            a = crypto.decAttr(a, k)
+            return { h: f.h, p: f.p, t: f.t, size: f.s, name: a.n }
+          } catch (error) { return }
+        }).filter(Boolean)
 
         let root = { }
         const sort = files.map((file, i) => {
