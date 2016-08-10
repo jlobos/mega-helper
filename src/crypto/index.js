@@ -50,7 +50,7 @@ export function decAttr (attr, key) {
 
   let b = String.fromCharCode.apply(null, attr).replace(/\0/g, '')
 
-  if (b.substr(0, 6) !== 'MEGA{"') { throw Error('Decryption failed') }
+  if (b.substr(0, 6) !== 'MEGA{"') { throw Error('decryption failed') }
   return JSON.parse(from8(b.substr(4)))
 }
 
